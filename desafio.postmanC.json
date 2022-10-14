@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "4b3822e5-71fc-486c-8301-6184bcae48bc",
+		"name": "Builders Desafio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23840809"
+	},
+	"item": [
+		{
+			"name": "build-acount",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							"function numeroconta(){\r",
+							"    var conta =[\"62f87af90ba501353df77b95\",\"630932fc327fb162f0d8e72c\",\"630933566e9f1d5128cf4c00\"]\r",
+							"    // pegando um número aleatorio da matriz conta.\r",
+							"    var randomconta = conta[Math.floor(Math.random()*conta.length)];\r",
+							"    return(randomconta)\r",
+							"}\r",
+							"pm.variables.set(\"contabanco\",numeroconta());\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200)\r",
+							"});\r",
+							"pm.test(\"400 - Invalid request\", function(){\r",
+							"    pm.response.to.have.status(400)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"404 - Conta não rencontrada\", function(){\r",
+							"    pm.response.to.have.status(404)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/{{contabanco}}\\",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{contabanco}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "build-qrcode",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							"function gerarqrcode(){\r",
+							"    var qrcode =[\"00020126330014BR.GOV.BCB.PIX011170326165690520400005303986540510.005802BR5911Builders 016002SP62150511PAGAMENTO0163044312\",\"00020126330014BR.GOV.BCB.PIX011170326165690520400005303986540520.005802BR5911Builders 016002SP62150511PAGAMENTO0163044312\",\"00020126330014BR.GOV.BCB.PIX011170326165690520400005303986540550.005802BR5911Builders 016002SP62150511PAGAMENTO0163044312\",\"00020126330014BR.GOV.BCB.PIX011170326165690520400005303986540550.005802BR5911Builders 016002SP62150512PAGAMENTO0163044312\"]\r",
+							"    // pegando um número aleatorio da matriz conta.\r",
+							"    var randomqr = qrcode[Math.floor(Math.random()*qrcode.length)];\r",
+							"    return(randomqr)\r",
+							"}\r",
+							"pm.variables.set(\"qrpix\",gerarqrcode());\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200)\r",
+							"});\r",
+							"pm.test(\"400 - Invalid request\", function(){\r",
+							"    pm.response.to.have.status(400)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"404 - Conta não rencontrada\", function(){\r",
+							"    pm.response.to.have.status(404)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/{{qrpix}}\\",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{qrpix}}",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
